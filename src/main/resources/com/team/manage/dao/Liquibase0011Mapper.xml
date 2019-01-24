@@ -12,5 +12,7 @@
         select  * from  liquibase0011
     </select>
 
-
+    <insert id="insertValues" parameterType="com.team.manage.entity.Liquibase0011">
+        insert into liquibase0011 values (#{id}, #{firstname}, #{lastname})
+    </insert>
 </mapper>

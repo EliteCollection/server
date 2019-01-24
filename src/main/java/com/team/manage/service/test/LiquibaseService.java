@@ -13,4 +13,6 @@ public interface LiquibaseService {
 
     List<Liquibase0011> getLiquibase();
 
+    int saveHello(Liquibase0011 liquibase0011);
+
 }
