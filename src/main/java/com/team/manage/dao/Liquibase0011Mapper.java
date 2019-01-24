@@ -2,7 +2,6 @@ package com.team.manage.dao;
 
 import com.team.manage.entity.Liquibase0011;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.Mapping;
 
 import java.util.List;
 
@@ -18,4 +17,6 @@ public interface Liquibase0011Mapper {
      * @return
      */
    List<Liquibase0011> getLiquibase0011();
+
+   int insertValues(Liquibase0011 liquibase0011);
 }

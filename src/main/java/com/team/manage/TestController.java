@@ -18,6 +18,7 @@ import java.util.List;
 @RestController
 public class TestController {
 
+
     @Autowired
     private LiquibaseService liquibaseService;
     /**
@@ -28,5 +29,21 @@ public class TestController {
     public List<Liquibase0011> getLiquibase0011(){
         System.out.println(1111111111+"------------");
         return liquibaseService.getLiquibase();
+    }
+
+    @RequestMapping("/hello")
+    public String hello(){
+        return "hello";
+    }
+
+    @RequestMapping("save")
+    public String save(){
+        Liquibase0011 liquibase0011 = new Liquibase0011();
+        liquibase0011.setId(23);
+        liquibase0011.setFirstname("zhang");
+        liquibase0011.setLastname("san");
+        int i = liquibaseService.saveHello(liquibase0011);
+        System.out.println(i);
+        throw new  RuntimeException("111");
     }
 }
