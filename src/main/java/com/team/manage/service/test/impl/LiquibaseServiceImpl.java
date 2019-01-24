@@ -23,7 +23,6 @@ public class LiquibaseServiceImpl implements LiquibaseService {
 
     @Override
     public List<Liquibase0011> getLiquibase() {
-        System.out.println("走到了实现类");
         return liquibase0011Mapper.getLiquibase0011();
     }
 }
