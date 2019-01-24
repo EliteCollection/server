@@ -1,0 +1,33 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet id="v1-001" author="tcyu" dbms="mysql">
+        <update tableName="t_manage_version">
+            <column name="version" value='v1.0.0'/>
+            <column name="update_time" value='NOW()'/>
+            <where>id=1</where>
+        </update>
+    </changeSet>
+    <changeSet id="v1-002" author="tcyu">
+        <createTable tableName="liquibase0011">
+            <column name="id" type="bigint(15)"/>
+            <column name="firstname" type="varchar(255)"/>
+            <column name="lastname" type="varchar(255)"/>
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value=" engine InnoDB"/>
+        </modifySql>
+    </changeSet>
+    <changeSet id="v1-003" author="tcyu">
+        <sql>
+            insert into liquibase0011  values (123,'213','232')
+        </sql>
+    </changeSet>
+    <changeSet id="v1-004" author="tcyu">
+        <sql>
+            insert into liquibase0011  values (353,'545','545')
+        </sql>
+    </changeSet>
+</databaseChangeLog>

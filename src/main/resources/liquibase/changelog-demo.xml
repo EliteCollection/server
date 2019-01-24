@@ -1,0 +1,430 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<!--随访liquibase示例文件,请勿操作、修改-->
+
+
+	<!--
+	每个changeSet通过id、author唯一标识；id相同则author必须不同，author相同则id必须不同
+
+	databasechangelog databasechangeloglock
+
+	不当操作会锁住，解锁：
+	update databasechangeloglock set locked=0
+	-->
+
+	<!--engine
+	可以通过<modifySql>标签指定(liquibase暂时仅支持这种方式)，
+	或在安装mysql时指定默认的engine
+	-->
+	<!--指定engine InnoDB-->
+	<changeSet id="00000011" author="zlb">
+		<createTable tableName="liquibase0011">
+			<column name="id" type="bigint(15)"/>
+			<column name="firstname" type="varchar(255)"/>
+			<column name="lastname" type="varchar(255)"/>
+		</createTable>
+		<modifySql dbms="mysql">
+			 <append value=" engine InnoDB"/>
+		</modifySql>
+		<!--使用modifySql后 可能无法再添加同级其他标签，需要新建一个changeSet-->
+	</changeSet>
+	<!--
+	CREATE TABLE `liquibase0011` (
+	  `id` bigint(15) DEFAULT NULL,
+	  `firstname` varchar(255) DEFAULT NULL,
+	  `lastname` varchar(255) DEFAULT NULL
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	-->
+
+	<!--指定engine MyISAM-->
+	<changeSet id="00000012" author="zlb">
+        <createTable tableName="liquibase0012">
+            <column name="id" type="bigint(15)"/>
+            <column name="firstname" type="varchar(255)"/>
+            <column name="lastname" type="varchar(255)"/>
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value=" engine MyISAM"/>
+        </modifySql>
+		<!--使用modifySql后 可能无法再添加同级其他标签，需要新建一个changeSet-->
+    </changeSet>
+	<!--
+	CREATE TABLE `liquibase0012` (
+	  `id` bigint(15) DEFAULT NULL,
+	  `firstname` varchar(255) DEFAULT NULL,
+	  `lastname` varchar(255) DEFAULT NULL
+	) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+	-->
+
+	<!-- 创建表 (自增主键)-->
+    <changeSet id="0001" author="zlb">
+        <createTable tableName="liquibase" remarks="liquibase表">
+            <column name="id" type="bigint(15)" remarks="主键ID">
+                <!-- 定义主键 -->
+                <constraints primaryKey="true" primaryKeyName="pk_liquibase_id" />
+            </column>
+            <column name="age" type="varchar(8)" defaultValue="NULL" remarks="年龄">
+                <!-- 默认可为空 -->
+            </column>
+            <column name="name" type="varchar(32)" defaultValue="zlb" remarks="名字">
+                <!-- 定义不能为空 -->
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+		<addAutoIncrement tableName="liquibase"
+			columnName="id" incrementBy="1" startWith="1" columnDataType="bigint(15)" />
+    </changeSet>
+	<!--
+	CREATE TABLE `liquibase` (
+	  `id` bigint(15) NOT NULL AUTO_INCREMENT,
+	  `age` varchar(8) DEFAULT NULL COMMENT '年龄',
+	  `name` varchar(32) NOT NULL DEFAULT 'zlb' COMMENT '名字',
+	  PRIMARY KEY (`id`)
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='liquibase表';
+	-->
+
+	<!-- 创建表 联合主键id,age -->
+	<changeSet id="00010" author="zlb">
+        <createTable tableName="liquibase02" remarks="liquibase02表">
+            <column name="id" type="bigint(15)" remarks="主键ID">
+            </column>
+            <column name="age" type="varchar(8)" defaultValue="NULL" remarks="年龄">
+                <!-- 默认可为空 -->
+            </column>
+            <column name="name" type="varchar(32)" defaultValue="zlb" remarks="名字">
+                <!-- 定义不能为空 -->
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey columnNames="id,age" constraintName="pk_liquibase02_id_age" 			tableName="liquibase02"/>
+	</changeSet>
+	<!--
+	CREATE TABLE `liquibase` (
+	  `id` bigint(15) NOT NULL DEFAULT '0' COMMENT '主键ID',
+	  `age` varchar(8) NOT NULL DEFAULT '' COMMENT '年龄',
+	  `name` varchar(32) NOT NULL DEFAULT 'zlb' COMMENT '名字',
+	  PRIMARY KEY (`id`,`age`)
+	) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='liquibase表';
+	-->
+
+	<!-- 创建表 联合主键id,age 并且id自增-->
+	<changeSet id="00011" author="zlb">
+        <createTable tableName="liquibase03" remarks="liquibase03表">
+            <column name="id" type="bigint(15)" remarks="主键ID">
+            </column>
+            <column name="age" type="varchar(8)" defaultValue="NULL" remarks="年龄">
+                <!-- 默认可为空 -->
+            </column>
+            <column name="name" type="varchar(32)" defaultValue="zlb" remarks="名字">
+                <!-- 定义不能为空 -->
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey columnNames="id,age" constraintName="pk_liquibase03_id_age" 			tableName="liquibase03"/>
+        <addAutoIncrement tableName="liquibase03" columnName="id" incrementBy="1" 			startWith="1" columnDataType="bigint(15)" />
+    </changeSet>
+	<!--
+	CREATE TABLE `liquibase03` (
+	  `id` bigint(15) NOT NULL AUTO_INCREMENT,
+	  `age` varchar(8) NOT NULL DEFAULT '' COMMENT '年龄',
+	  `name` varchar(32) NOT NULL DEFAULT 'zlb' COMMENT '名字',
+	  PRIMARY KEY (`id`,`age`)
+	) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='liquibase03表';
+	-->
+
+	<!-- 增加默认值 -->
+	<changeSet id="0002" author="zlb">
+		<addDefaultValue columnDataType="varchar(8)" columnName="age" defaultValue="29" tableName="liquibase"/>
+	</changeSet>
+	<!--
+	ALTER TABLE liquibase ALTER age SET DEFAULT '22';
+	-->
+
+	<!-- 增加非空约束 -->
+	<changeSet id="0003" author="zlb">
+		<addNotNullConstraint tableName="liquibase" columnName="age" defaultNullValue="24"
+			columnDataType="varchar(8) " />
+	</changeSet>
+	<!--
+	UPDATE liquibase SET id = '24' WHERE id IS NULL; -defaultNullValue:给当前为null的数据赋值
+	ALTER TABLE liquibase MODIFY age VARCHAR(8) NOT NULL;-columnDataType:定义数据类型
+	-->
+
+	<!-- 增加字段 -->
+	<changeSet id="0004" author="zlb">
+        <addColumn tableName="liquibase">
+            <column name="description" type="varchar(50)" remarks="描述" />
+        </addColumn>
+    </changeSet>
+	<!--
+	ALTER TABLE liquibase ADD description VARCHAR(50) NULL;-字段默认是可为空且默认值为NULL
+	-->
+
+	<!-- 增加主键 --><!--联合主键-->
+	<changeSet id="0005" author="zlb">
+		<addPrimaryKey columnNames="id" constraintName="pk_liquibase2_id" tableName="liquibase2"/>
+	</changeSet>
+	<!--
+	ALTER TABLE liquibase2 ADD PRIMARY KEY (id);
+	-->
+
+	<!-- 修改字段类型 -->
+	<changeSet id="0006" author="zlb">
+		<modifyDataType tableName="liquibase" columnName="description"
+			newDataType="varchar(64)" />
+	</changeSet>
+	<!--
+	ALTER TABLE liquibase MODIFY description varchar(64);
+	-->
+
+	<!-- 增加唯一约束 -->
+	<changeSet id="0007" author="zlb">
+		<addUniqueConstraint columnNames="description" constraintName="const_description" tableName="liquibase"/>
+	</changeSet>
+	<!--
+	ALTER TABLE liquibase ADD CONSTRAINT const_description UNIQUE (description);
+	-->
+
+	<!-- 增加唯一约束(多个字段) -->
+	<changeSet id="0007" author="zlb">
+		<addUniqueConstraint columnNames="name,age" constraintName="const_description" tableName="liquibase"/>
+	</changeSet>
+	<!--
+	ALTER TABLE liquibase.liquibase ADD CONSTRAINT const_description UNIQUE (name, age)
+	-->
+
+	<!-- 增加外键 -->
+	<changeSet author="zlb" id="0008">
+		<addForeignKeyConstraint baseColumnNames="liquibase_id"
+				baseTableName="liquibase1"
+				constraintName="fk_liquibase1_liquibase"
+				onDelete="CASCADE"
+				onUpdate="RESTRICT"
+				referencedColumnNames="id"
+				referencedTableName="liquibase"/>
+	</changeSet>
+	<!--
+	ALTER TABLE liquibase1 ADD CONSTRAINT fk_liquibase1_liquibase FOREIGN KEY (liquibase_id) REFERENCES liquibase (id) ON UPDATE RESTRICT ON DELETE CASCADE;
+	-外键主表字段必须有索引或是主键，主从表字段数据类型要相同等
+	-->
+
+	<!-- 创建索引 -->
+	<changeSet id="0009" author="zlb">
+		<createIndex tableName="liquibase" indexName="idx_liquibase_age"
+			unique="true">
+			<column name="age"></column>
+		</createIndex>
+	</changeSet>
+	<!--
+	CREATE UNIQUE INDEX idx_liquibase_age ON liquibase(age);
+	-->
+
+	<!-- 创建视图 -->
+	<changeSet id="00010" author="zlb">
+		<createView replaceIfExists="true" viewName="v_liquibase">
+			select id, age, name from liquibase where age > 20
+		</createView>
+	</changeSet>
+	<!--
+	CREATE OR REPLACE VIEW v_liquibase AS select id, age, name from liquibase where age > 20;
+	-->
+
+	<!-- 新增数据 -->
+	<changeSet id="00011" author="zlb">
+		<insert tableName="liquibase">
+			<column name="id" value='25' />
+			<column name="name" value="zlb" />
+			<column name="age" value='24' />
+			<column name="description" value="描述" />
+		</insert>
+	</changeSet>
+	<!--
+	INSERT INTO liquibase (id,name,age,description) VALUES (25,"zlb",24,"描述");
+	-->
+
+	<!-- 修改数据 -->
+	<changeSet id="00012" author="zlb">
+		<update tableName="liquibase">
+			<column name="age" value='30'/>
+			<where>id=25</where>
+		</update>
+	</changeSet>
+	<!--
+	UPDATE liquibase SET age = 30 WHERE id = 25;
+	-->
+
+	<!-- 删除数据 -->
+	<changeSet id="00013" author="zlb">
+		<delete tableName="liquibase">
+			<where>id=25</where>
+		</delete>
+	</changeSet>
+	<!--
+	DELETE FROM liquibase WHERE id = 25;
+	-->
+
+	<!-- 增加自增序列 -->
+	<changeSet id="00014" author="zlb">
+		<addAutoIncrement tableName="liquibase" columnName="id"
+			incrementBy="1" startWith="1000" columnDataType="int" />
+	</changeSet>
+	<!--
+	ALTER TABLE liquibase MODIFY id INT AUTO_INCREMENT;-id如果不为int类型会变为int类型
+	ALTER TABLE liquibase AUTO_INCREMENT=1000;-从一千开始递增
+	-->
+
+	<!-- 删除列 -->
+	<changeSet id="00015" author="zlb">
+		<dropColumn tableName="liquibase" columnName="description" />
+	</changeSet>
+	<!--
+	ALTER TABLE liquibase DROP COLUMN description;
+	-->
+
+	<!-- 删除索引 -->
+	<changeSet id="00016" author="zlb">
+		<dropIndex tableName="liquibase" indexName="idx_liquibase_age" />
+	</changeSet>
+	<!--
+	DROP INDEX idx_liquibase_age ON liquibase;
+	-->
+
+	<!-- 删除唯一约束 -->
+	<changeSet author="zlb" id="00017">
+		<dropUniqueConstraint constraintName="const_description" tableName="liquibase" uniqueColumns="description"/>
+	</changeSet>
+	<!--
+	ALTER TABLE liquibase DROP KEY const_description;
+	-->
+
+	<!-- 删除外键 -->
+	<changeSet author="zlb" id="00018">
+		<dropForeignKeyConstraint baseTableName="liquibase1" constraintName="fk_liquibase1_liquibase"/>
+	</changeSet>
+	<!--
+	ALTER TABLE liquibase1 DROP FOREIGN KEY fk_liquibase1_liquibase;
+	-->
+
+	<!-- 删除所有外键关联关系 -->
+	<changeSet id="00019" author="zlb">
+		<dropAllForeignKeyConstraints baseTableName="liquibase1" />
+	</changeSet>
+
+	<!-- 删除默认值 -->
+	<changeSet id="00020" author="zlb">
+		<dropDefaultValue tableName="liquibase" columnName="age"
+			columnDataType="varchar(8)" />
+	</changeSet>
+	<!--
+	ALTER TABLE liquibase ALTER age DROP DEFAULT;
+	-->
+
+	<!-- 删除非空约束 -->
+	<changeSet id="00021" author="zlb">
+		<dropNotNullConstraint tableName="liquibase"
+			columnName="age" columnDataType="varchar(8)" />
+	</changeSet>
+	<!--
+	ALTER TABLE liquibase MODIFY age VARCHAR(8) NULL;
+	-->
+
+	<!-- 删除主键 -->
+	<changeSet author="zlb" id="00022">
+		<dropPrimaryKey constraintName="pk_liquibase_id" tableName="liquibase2"/>
+	</changeSet>
+	<!--
+	ALTER TABLE liquibase2 DROP PRIMARY KEY;
+	-->
+
+	<!-- 删表 -->
+	<changeSet id="00023" author="zlb">
+		<dropTable tableName="liquibase2" />
+	</changeSet>
+	<!--
+	DROP TABLE liquibase2;
+	-->
+
+	<!-- 删除视图 -->
+	<changeSet author="zlb" id="00024">
+		<dropView viewName="v_liquibase"/>
+	</changeSet>
+	<!--
+	DROP VIEW v_liquibase;
+	-->
+
+	<!-- 字段重命名 -->
+	<changeSet id="00025" author="zlb">
+		<renameColumn tableName="liquibase" oldColumnName="description2"
+			newColumnName="description3" columnDataType="varchar(50)" remarks="" />
+	</changeSet>
+	<!--
+	ALTER TABLE liquibase CHANGE description2 description3 varchar(50) COMMENT '';
+	-columnDataType:定义数据类型
+	-->
+
+	<!-- 表重命名 -->
+	<changeSet id="00026" author="zlb">
+		<renameTable newTableName="liquibase21" oldTableName="liquibase2" />
+	</changeSet>
+	<!--
+	ALTER TABLE liquibase2 RENAME liquibase21;
+	-->
+
+	<!-- 视图重命名 -->
+	<changeSet author="zlb" id="00027">
+		<renameView newViewName="v_liquibase_new" oldViewName="v_liquibase"/>
+	</changeSet>
+	<!--
+	RENAME TABLE v_liquibase TO v_liquibase_new;
+	-->
+
+	<!-- 使用sql扩展Liquibase自带标签,适合复杂sql -->
+    <changeSet author="zlb" id="00028">
+        <sql endDelimiter="\nGO" splitStatements="true" stripComments="true">
+            --单行注释
+            insert into liquibase (description) values ('描述1')
+        </sql>
+        <sql endDelimiter="\nGO" splitStatements="true" stripComments="true">
+            insert into liquibase
+            (description)
+            /*
+            多行注释
+            */
+            values ('描述2')
+        </sql>
+    </changeSet>
+
+	<changeSet id="0000000" author="zlb">
+        <createTable tableName="liquibase23" remarks="liquibase表">
+            <column name="id" type="bigint(15)" remarks="主键ID" autoIncrement="true" incrementBy="1" startWith="10000" >
+                <!-- 定义主键 -->
+               <constraints primaryKey="true" primaryKeyName="pk_liquibase_id" />
+            </column>
+            <column name="age" type="varchar(8)" defaultValue="NULL" remarks="年龄">
+                <!-- 默认可为空 -->
+            </column>
+            <column name="name" type="varchar(32)" defaultValue="zlb" remarks="名字">
+                <!-- 定义不能为空 -->
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="manage-lbzheng0003" author="lbzheng@joinhealth.cn">
+        <addColumn tableName="t_user_suggestion">
+            <column name="update_time" type="timestamp" defaultValue="CURRENT_TIMESTAMP" remarks="更新时间">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <modifySql dbms="mysql">
+		<!-- 自动初始化和更新: -->
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+        </modifySql>
+    </changeSet>
+</databaseChangeLog>
