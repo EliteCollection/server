@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/team_manage
+    url: jdbc:mysql://47.244.120.77:3306/team_manage?useUnicode=true&amp;characterEncoding=UTF-8&allowMultiQueries=true
     username: root
-    password: glen
+    password: Team123456
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       # 下面为连接池的补充设置，应用到上面所有数据源中
@@ -49,3 +49,15 @@ spring:
     enabled: true
 
 
+
+
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+#--------------------------Server--------------------------
+server:
+  tomcat:
+    uri-encoding: UTF-8
