@@ -17,13 +17,13 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         logger.info("-----开始处理登录拦截请求判断-----");
-        Object obj = request.getSession().getAttribute("userName");
-        if (obj == null || !(obj instanceof String)){
-            logger.info("----未登录----");
-            response.sendRedirect("/login");
-            return false;
-        }
-        logger.info("用户名为:"+obj);
+//        Object obj = request.getSession().getAttribute("userName");
+//        if (obj == null || !(obj instanceof String)){
+//            logger.info("----未登录----");
+//            response.sendRedirect("/login");
+//            return false;
+//        }
+//        logger.info("用户名为:"+obj);
         return true;
     }
 }

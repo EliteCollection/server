@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 /**
  * String的常用共用方法
  *
- * @author bjyuan
+ * @author tcyu
  */
 public class StringUtil {
 
@@ -347,41 +347,6 @@ public class StringUtil {
     }
 
     /**
-     * 获取随访账号前缀
-     *
-     * @param account
-     * @return
-     */
-    public static String getPrefix(String account) {
-        return account.substring(0, account.indexOf("_"));
-    }
-
-    /**
-     * 获取蓝牛号数字
-     *
-     * @param hugId
-     * @return
-     */
-    public static Integer getHugNo(String hugId) {
-        return Integer.parseInt(hugId.substring(2));
-    }
-
-    /**
-     * 比较蓝牛号数字 hugId1>=hugId2 true
-     *
-     * @param hugId1
-     * @param hugId2
-     * @return
-     */
-    public static boolean compareHugIdNo(String hugId1, String hugId2) {
-        if (getHugNo(hugId1) >= getHugNo(hugId2)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * @Author:yudongdong
      * @Description: 将字符串以，号分开 组成list返回
      * @param:
@@ -625,9 +590,12 @@ public class StringUtil {
         }
         return hs.toString().toUpperCase();
     }
-
+    public static String getUUUID(){
+        return UUID.randomUUID().toString().replace("-", "");
+    }
     public static void main(String[] args) {
         //System.out.println(hideBankCard("83836267383838383"));
-        System.out.println(splitListByString("123x，1546d，123，是的"));
+        System.out.println(getMd5("Team123456"));
+        System.out.println(getUUUID());
     }
 }

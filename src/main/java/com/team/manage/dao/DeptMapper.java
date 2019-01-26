@@ -1,7 +1,11 @@
 package com.team.manage.dao;
 
 import com.team.manage.entity.Dept;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
+@Mapper
+@Component
 public interface DeptMapper {
 
 
