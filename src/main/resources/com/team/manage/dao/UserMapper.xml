@@ -36,29 +36,29 @@
     select 
     <include refid="Base_Column_List" />
     from t_manage_user
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from t_manage_user
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id}
   </delete>
 
-  <insert id="insert" parameterType="com.team.manage.entity.User">
+  <insert id="insert" parameterType="com.team.manage.entity.UserDTO">
     insert into t_manage_user (id, work_number, user_name, 
       account, password, mobile_no, 
       email, idcard, sex, 
       birthday, dept_code, dept_name, 
       post_code, post_name, user_flag, 
-      invalid_flag, login_time, personal_resume, 
+      login_time, personal_resume,
       user_auth, create_time, update_time
       )
-    values (#{id,jdbcType=VARCHAR}, #{workNumber,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{mobileNo,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
-      #{birthday,jdbcType=TIMESTAMP}, #{deptCode,jdbcType=VARCHAR}, #{deptName,jdbcType=VARCHAR}, 
-      #{postCode,jdbcType=VARCHAR}, #{postName,jdbcType=VARCHAR}, #{userFlag,jdbcType=INTEGER}, 
-      #{invalidFlag,jdbcType=INTEGER}, #{loginTime,jdbcType=TIMESTAMP}, #{personalResume,jdbcType=VARCHAR}, 
-      #{userAuth,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+    values (#{id}, #{workNumber}, #{userName}, 
+      #{account}, #{password}, #{mobileNo}, 
+      #{email}, #{idcard}, #{sex}, 
+      #{birthday}, #{deptCode}, #{deptName}, 
+      #{postCode}, #{postName}, #{userFlag}, 
+      #{loginTime}, #{personalResume},
+      #{userAuth}, #{createTime}, #{updateTime}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.team.manage.entity.User">
@@ -130,67 +130,67 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=VARCHAR},
+        #{id},
       </if>
       <if test="workNumber != null">
-        #{workNumber,jdbcType=VARCHAR},
+        #{workNumber},
       </if>
       <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
+        #{userName},
       </if>
       <if test="account != null">
-        #{account,jdbcType=VARCHAR},
+        #{account},
       </if>
       <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+        #{password},
       </if>
       <if test="mobileNo != null">
-        #{mobileNo,jdbcType=VARCHAR},
+        #{mobileNo},
       </if>
       <if test="email != null">
-        #{email,jdbcType=VARCHAR},
+        #{email},
       </if>
       <if test="idcard != null">
-        #{idcard,jdbcType=VARCHAR},
+        #{idcard},
       </if>
       <if test="sex != null">
-        #{sex,jdbcType=INTEGER},
+        #{sex},
       </if>
       <if test="birthday != null">
-        #{birthday,jdbcType=TIMESTAMP},
+        #{birthday},
       </if>
       <if test="deptCode != null">
-        #{deptCode,jdbcType=VARCHAR},
+        #{deptCode},
       </if>
       <if test="deptName != null">
-        #{deptName,jdbcType=VARCHAR},
+        #{deptName},
       </if>
       <if test="postCode != null">
-        #{postCode,jdbcType=VARCHAR},
+        #{postCode},
       </if>
       <if test="postName != null">
-        #{postName,jdbcType=VARCHAR},
+        #{postName},
       </if>
       <if test="userFlag != null">
-        #{userFlag,jdbcType=INTEGER},
+        #{userFlag},
       </if>
       <if test="invalidFlag != null">
-        #{invalidFlag,jdbcType=INTEGER},
+        #{invalidFlag},
       </if>
       <if test="loginTime != null">
-        #{loginTime,jdbcType=TIMESTAMP},
+        #{loginTime},
       </if>
       <if test="personalResume != null">
-        #{personalResume,jdbcType=VARCHAR},
+        #{personalResume},
       </if>
       <if test="userAuth != null">
-        #{userAuth,jdbcType=VARCHAR},
+        #{userAuth},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime},
       </if>
       <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
+        #{updateTime},
       </if>
     </trim>
   </insert>
@@ -199,90 +199,141 @@
     update t_manage_user
     <set>
       <if test="workNumber != null">
-        work_number = #{workNumber,jdbcType=VARCHAR},
+        work_number = #{workNumber},
       </if>
       <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
+        user_name = #{userName},
       </if>
       <if test="account != null">
-        account = #{account,jdbcType=VARCHAR},
+        account = #{account},
       </if>
       <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
+        password = #{password},
       </if>
       <if test="mobileNo != null">
-        mobile_no = #{mobileNo,jdbcType=VARCHAR},
+        mobile_no = #{mobileNo},
       </if>
       <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
+        email = #{email},
       </if>
       <if test="idcard != null">
-        idcard = #{idcard,jdbcType=VARCHAR},
+        idcard = #{idcard},
       </if>
       <if test="sex != null">
-        sex = #{sex,jdbcType=INTEGER},
+        sex = #{sex},
       </if>
       <if test="birthday != null">
-        birthday = #{birthday,jdbcType=TIMESTAMP},
+        birthday = #{birthday},
       </if>
       <if test="deptCode != null">
-        dept_code = #{deptCode,jdbcType=VARCHAR},
+        dept_code = #{deptCode},
       </if>
       <if test="deptName != null">
-        dept_name = #{deptName,jdbcType=VARCHAR},
+        dept_name = #{deptName},
       </if>
       <if test="postCode != null">
-        post_code = #{postCode,jdbcType=VARCHAR},
+        post_code = #{postCode},
       </if>
       <if test="postName != null">
-        post_name = #{postName,jdbcType=VARCHAR},
+        post_name = #{postName},
       </if>
       <if test="userFlag != null">
-        user_flag = #{userFlag,jdbcType=INTEGER},
+        user_flag = #{userFlag},
       </if>
       <if test="invalidFlag != null">
-        invalid_flag = #{invalidFlag,jdbcType=INTEGER},
+        invalid_flag = #{invalidFlag},
       </if>
       <if test="loginTime != null">
-        login_time = #{loginTime,jdbcType=TIMESTAMP},
+        login_time = #{loginTime},
       </if>
       <if test="personalResume != null">
-        personal_resume = #{personalResume,jdbcType=VARCHAR},
+        personal_resume = #{personalResume},
       </if>
       <if test="userAuth != null">
-        user_auth = #{userAuth,jdbcType=VARCHAR},
+        user_auth = #{userAuth},
       </if>
       <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+        create_time = #{createTime},
       </if>
       <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.team.manage.entity.User">
     update t_manage_user
-    set work_number = #{workNumber,jdbcType=VARCHAR},
-      user_name = #{userName,jdbcType=VARCHAR},
-      account = #{account,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      mobile_no = #{mobileNo,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      idcard = #{idcard,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=INTEGER},
-      birthday = #{birthday,jdbcType=TIMESTAMP},
-      dept_code = #{deptCode,jdbcType=VARCHAR},
-      dept_name = #{deptName,jdbcType=VARCHAR},
-      post_code = #{postCode,jdbcType=VARCHAR},
-      post_name = #{postName,jdbcType=VARCHAR},
-      user_flag = #{userFlag,jdbcType=INTEGER},
-      invalid_flag = #{invalidFlag,jdbcType=INTEGER},
-      login_time = #{loginTime,jdbcType=TIMESTAMP},
-      personal_resume = #{personalResume,jdbcType=VARCHAR},
-      user_auth = #{userAuth,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=VARCHAR}
+    set work_number = #{workNumber},
+      user_name = #{userName},
+      account = #{account},
+      password = #{password},
+      mobile_no = #{mobileNo},
+      email = #{email},
+      idcard = #{idcard},
+      sex = #{sex},
+      birthday = #{birthday},
+      dept_code = #{deptCode},
+      dept_name = #{deptName},
+      post_code = #{postCode},
+      post_name = #{postName},
+      user_flag = #{userFlag},
+      invalid_flag = #{invalidFlag},
+      login_time = #{loginTime},
+      personal_resume = #{personalResume},
+      user_auth = #{userAuth},
+      create_time = #{createTime},
+      update_time = #{updateTime}
+    where id = #{id}
   </update>
+
+  <select id="getUser" parameterType="com.team.manage.entity.UserDTO" resultMap="BaseResultMap">
+      select
+        <include refid="Base_Column_List"/>
+      FROM
+        t_manage_user
+      WHERE
+        1 = 1
+    <if test="workNumber != null and workNumber !=''">
+       AND work_number = #{workNumber}
+    </if>
+    <if test="userName != null and userName !=''">
+      AND user_name = #{userName}
+    </if>
+    <if test="account != null and account != ''">
+      AND account = #{account}
+    </if>
+    <if test="password != null and password != ''">
+      AND password = #{password}
+    </if>
+    <if test="mobileNo != null and mobileNo != ''">
+      AND mobile_no = #{mobileNo}
+    </if>
+    <if test="email != null and email !=''">
+      AND email = #{email}
+    </if>
+    <if test="idcard != null and idcard != ''">
+      AND idcard = #{idcard}
+    </if>
+    <if test="sex != null">
+      AND sex = #{sex}
+    </if>
+    <if test="birthday != null and birthday !=''">
+      AND birthday = #{birthday}
+    </if>
+    <if test="deptCode != null and deptCode != ''">
+      AND dept_code = #{deptCode}
+    </if>
+    <if test="deptName != null and deptName != ''">
+      AND dept_name = #{deptName}
+    </if>
+    <if test="postCode != null and postCode != ''">
+      AND post_code = #{postCode}
+    </if>
+    <if test="postName != null and postName != ''">
+      AND post_name = #{postName}
+    </if>
+    <if test="userFlag != null">
+      AND user_flag = #{userFlag}
+    </if>
+  </select>
 </mapper>

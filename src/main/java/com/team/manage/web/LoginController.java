@@ -1,11 +1,18 @@
 package com.team.manage.web;
 
 import com.team.manage.common.SimpleResult;
+import com.team.manage.common.util.StringUtil;
+import com.team.manage.entity.User;
+import com.team.manage.entity.UserDTO;
+import com.team.manage.service.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 /**
  * Create By tcyu
@@ -14,12 +21,36 @@ import javax.servlet.http.HttpSession;
  */
 @RestController
 public class LoginController {
-    private SimpleResult result;
-    @RequestMapping("/login")
-    public SimpleResult login(HttpServletRequest httpServletRequest){
-        HttpSession session = httpServletRequest.getSession();
-        session.setAttribute("userName","张三");
+
+    SimpleResult result;
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/login")
+    public SimpleResult login(String account, String password){
         result = new SimpleResult(false);
+        UserDTO userDTO = new UserDTO();
+        userDTO.setAccount(account);
+        userDTO.setPassword(StringUtil.getMd5(password));
+        User user = userService.getUser(userDTO);
+        if (user != null){
+            result.setSuccess(true);
+            result.addModel("user",user);
+            return result;
+        }
+        result.setMessage("账号或密码错误");
         return result;
     }
+
+    @PostMapping("/register")
+    public SimpleResult register(UserDTO userDTO){
+        result = new SimpleResult(false);
+        int re = userService.saveUser(userDTO);
+        if (re != 0){
+            result.setSuccess(true);
+        }
+        result.setMessage("注册失败");
+        return result;
+    }
+
 }
