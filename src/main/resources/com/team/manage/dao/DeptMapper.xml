@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.manage.dao.DeptMapper">
+  <resultMap id="BaseResultMap" type="com.team.manage.entity.Dept">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="dept_code" jdbcType="VARCHAR" property="deptCode" />
+    <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+    <result column="pinyin_code" jdbcType="INTEGER" property="pinyinCode" />
+    <result column="parent_dept_code" jdbcType="VARCHAR" property="parentDeptCode" />
+    <result column="parent_dept_name" jdbcType="VARCHAR" property="parentDeptName" />
+    <result column="invalid_flag" jdbcType="INTEGER" property="invalidFlag" />
+    <result column="dept_mobile_no" jdbcType="VARCHAR" property="deptMobileNo" />
+    <result column="sort_no" jdbcType="INTEGER" property="sortNo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    id, dept_code, dept_name, pinyin_code, parent_dept_code, parent_dept_name, invalid_flag, 
+    dept_mobile_no, sort_no, create_time, update_time
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_manage_dept
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_manage_dept
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.team.manage.entity.Dept">
+    insert into t_manage_dept (id, dept_code, dept_name, 
+      pinyin_code, parent_dept_code, parent_dept_name, 
+      invalid_flag, dept_mobile_no, sort_no, 
+      create_time, update_time)
+    values (#{id,jdbcType=VARCHAR}, #{deptCode,jdbcType=VARCHAR}, #{deptName,jdbcType=VARCHAR}, 
+      #{pinyinCode,jdbcType=INTEGER}, #{parentDeptCode,jdbcType=VARCHAR}, #{parentDeptName,jdbcType=VARCHAR}, 
+      #{invalidFlag,jdbcType=INTEGER}, #{deptMobileNo,jdbcType=VARCHAR}, #{sortNo,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.team.manage.entity.Dept">
+    insert into t_manage_dept
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="deptCode != null">
+        dept_code,
+      </if>
+      <if test="deptName != null">
+        dept_name,
+      </if>
+      <if test="pinyinCode != null">
+        pinyin_code,
+      </if>
+      <if test="parentDeptCode != null">
+        parent_dept_code,
+      </if>
+      <if test="parentDeptName != null">
+        parent_dept_name,
+      </if>
+      <if test="invalidFlag != null">
+        invalid_flag,
+      </if>
+      <if test="deptMobileNo != null">
+        dept_mobile_no,
+      </if>
+      <if test="sortNo != null">
+        sort_no,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null">
+        #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptName != null">
+        #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="pinyinCode != null">
+        #{pinyinCode,jdbcType=INTEGER},
+      </if>
+      <if test="parentDeptCode != null">
+        #{parentDeptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentDeptName != null">
+        #{parentDeptName,jdbcType=VARCHAR},
+      </if>
+      <if test="invalidFlag != null">
+        #{invalidFlag,jdbcType=INTEGER},
+      </if>
+      <if test="deptMobileNo != null">
+        #{deptMobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sortNo != null">
+        #{sortNo,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.team.manage.entity.Dept">
+    update t_manage_dept
+    <set>
+      <if test="deptCode != null">
+        dept_code = #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptName != null">
+        dept_name = #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="pinyinCode != null">
+        pinyin_code = #{pinyinCode,jdbcType=INTEGER},
+      </if>
+      <if test="parentDeptCode != null">
+        parent_dept_code = #{parentDeptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentDeptName != null">
+        parent_dept_name = #{parentDeptName,jdbcType=VARCHAR},
+      </if>
+      <if test="invalidFlag != null">
+        invalid_flag = #{invalidFlag,jdbcType=INTEGER},
+      </if>
+      <if test="deptMobileNo != null">
+        dept_mobile_no = #{deptMobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sortNo != null">
+        sort_no = #{sortNo,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.team.manage.entity.Dept">
+    update t_manage_dept
+    set dept_code = #{deptCode,jdbcType=VARCHAR},
+      dept_name = #{deptName,jdbcType=VARCHAR},
+      pinyin_code = #{pinyinCode,jdbcType=INTEGER},
+      parent_dept_code = #{parentDeptCode,jdbcType=VARCHAR},
+      parent_dept_name = #{parentDeptName,jdbcType=VARCHAR},
+      invalid_flag = #{invalidFlag,jdbcType=INTEGER},
+      dept_mobile_no = #{deptMobileNo,jdbcType=VARCHAR},
+      sort_no = #{sortNo,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+
+</mapper>

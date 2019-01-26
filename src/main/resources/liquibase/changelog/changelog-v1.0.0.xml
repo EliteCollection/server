@@ -30,4 +30,52 @@
             insert into liquibase0011  values (353,'545','545')
         </sql>
     </changeSet>
+
+    <changeSet id="v1-005" author="tcyu">
+        <createTable tableName="t_manage_dept" remarks="部门字典表">
+            <column name="id" type="varchar(32)" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="dept_code" type="varchar(32)" remarks="部门编码"/>
+            <column name="dept_name" type="varchar(50)" remarks="部门名称"/>
+            <column name="pinyin_code" type="int(11)" remarks="拼音码"/>
+            <column name="parent_dept_code" type="varchar(32)" remarks="上级部门编码"/>
+            <column name="parent_dept_name" type="varchar(50)" remarks="上级部门名称"/>
+            <column name="invalid_flag" type="int(11)" defaultValue="1" remarks="作废表示 0作废 1有效"/>
+            <column name="dept_mobile_no" type="varchar(20)" remarks="部门联系电话"/>
+            <column name="sort_no" type="int(11)" remarks="排序号"/>
+            <column name="create_time" type="datetime" remarks="创建时间"/>
+            <column name="update_time" type="datetime" remarks="更新时间"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="v1-006" author="tcyu">
+        <createTable tableName="t_manage_user" remarks="用户表">
+            <column name="id" type="varchar(32)" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="work_number" type="varchar(15)" remarks="工号"/>
+            <column name="user_name" type="varchar(20)" remarks="姓名"/>
+            <column name="account" type="varchar(30)" remarks="账号"/>
+            <column name="password" type="varchar(32)" remarks="密码"/>
+            <column name="mobile_no" type="varchar(15)" remarks="手机号码"/>
+            <column name="email" type="varchar(30)" remarks="邮箱"/>
+            <column name="idcard" type="varchar(20)" remarks="身份证号"/>
+            <column name="sex" type="int(11)" remarks="性别 1男 2女 3其他"/>
+            <column name="birthday" type="datetime" remarks="出生日期"/>
+            <column name="dept_code" type="varchar(32)" remarks="部门编码"/>
+            <column name="dept_name" type="varchar(50)" remarks="部门名称"/>
+            <column name="post_code" type="varchar(32)" remarks="职位编码"/>
+            <column name="post_name" type="varchar(32)" remarks="职位名称"/>
+            <column name="user_flag" type="int(11)" remarks="用户类型 1普通用户 2管理员"/>
+            <column name="invalid_flag" type="int(11)" remarks="有效表示 1有效 0无效"/>
+            <column name="login_time" type="datetime" remarks="最近一次登录时间"/>
+            <column name="personal_resume" type="varchar(200)" remarks="个人简介"/>
+            <column name="user_auth" type="varchar(500)" remarks="用户权限"/>
+            <column name="create_time" type="datetime" remarks="创建时间"/>
+            <column name="update_time" type="datetime" remarks="更新时间"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="v1-007" author="tcyu">
+        <modifyDataType tableName="t_manage_dept" columnName="pinyin_code" newDataType="varchar(32)"/>
+    </changeSet>
 </databaseChangeLog>

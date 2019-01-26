@@ -8,8 +8,6 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-@EnableTransactionManagement
-@MapperScan("com.team.manage.dao")
 public class ManageWebApplication {
 
     public static void main(String[] args) {
