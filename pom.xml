@@ -20,7 +20,6 @@
         <project.build.locales>UTF-8</project.build.locales>
         <java.version>1.8</java.version>
         <druid.version>1.0.9</druid.version>
-        <fastjson.version>1.2.3</fastjson.version>
         <mybatis.version>3.4.2</mybatis.version>
         <mysql.connector.version>5.1.29</mysql.connector.version>
         <pagehelper.version>4.0.1</pagehelper.version>
@@ -56,7 +55,6 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
-                <version>${fastjson.version}</version>
             </dependency>
 
             <!-- mybatis -->
@@ -160,7 +158,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
+            <version>1.2.43</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

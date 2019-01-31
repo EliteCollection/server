@@ -23,4 +23,12 @@ public interface UserService {
      * @return
      */
     int saveUser(UserDTO userDTO);
+
+    /**
+     * 修改用户的基本信息
+     * @param userDTO
+     * @return
+     */
+    int editUser(UserDTO userDTO);
+
 }

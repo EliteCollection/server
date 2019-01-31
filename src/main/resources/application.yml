@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/team_manage?useUnicode=true&amp;characterEncoding=UTF-8&allowMultiQueries=true
+    url: jdbc:mysql://47.244.120.77:3306/team_manage?useUnicode=true&amp;characterEncoding=UTF-8&allowMultiQueries=true
     username: root
     password: Team123456
     type: com.alibaba.druid.pool.DruidDataSource
