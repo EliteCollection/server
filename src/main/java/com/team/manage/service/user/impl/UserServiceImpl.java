@@ -45,4 +45,15 @@ public class UserServiceImpl implements UserService {
     public int saveUser(UserDTO userDTO) {
         return userMapper.insert(userDTO);
     }
+
+    /**
+     * 修改用户的基本信息
+     *
+     * @param userDTO
+     * @return
+     */
+    @Override
+    public int editUser(UserDTO userDTO) {
+        return userMapper.updateByPrimaryKeySelective(userDTO);
+    }
 }

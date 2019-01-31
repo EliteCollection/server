@@ -26,6 +26,12 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 登录验证
+     * @param account
+     * @param password
+     * @return
+     */
     @PostMapping("/login")
     public SimpleResult login(String account, String password){
         result = new SimpleResult(false);
@@ -42,6 +48,11 @@ public class LoginController {
         return result;
     }
 
+    /**
+     * 注册用户
+     * @param userDTO
+     * @return
+     */
     @PostMapping("/register")
     public SimpleResult register(UserDTO userDTO){
         result = new SimpleResult(false);
@@ -50,6 +61,18 @@ public class LoginController {
             result.setSuccess(true);
         }
         result.setMessage("注册失败");
+        return result;
+    }
+
+    /**
+     * 修改用户信息
+     * @param userDTO
+     * @return
+     */
+    @PostMapping("/editUser")
+    public SimpleResult editUser(UserDTO userDTO){
+        result = new SimpleResult();
+
         return result;
     }
 
