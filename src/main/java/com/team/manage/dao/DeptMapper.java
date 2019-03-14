@@ -18,6 +18,11 @@ public interface DeptMapper {
 
     Dept selectByPrimaryKey(String id);
 
+    /**
+     * 更新
+     * @param record
+     * @return
+     */
     int updateByPrimaryKeySelective(Dept record);
 
     int updateByPrimaryKey(Dept record);
