@@ -50,7 +50,7 @@
       birthday, dept_code, dept_name, 
       post_code, post_name, user_flag, 
       login_time, personal_resume,
-      user_auth, create_time, update_time
+      user_auth, create_time, update_time,invalid_flag
       )
     values (#{id}, #{workNumber}, #{userName}, 
       #{account}, #{password}, #{mobileNo}, 
@@ -58,7 +58,7 @@
       #{birthday}, #{deptCode}, #{deptName}, 
       #{postCode}, #{postName}, #{userFlag}, 
       #{loginTime}, #{personalResume},
-      #{userAuth}, #{createTime}, #{updateTime}
+      #{userAuth}, #{createTime}, #{updateTime}, #{invalidFlag}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.team.manage.entity.User">
@@ -335,5 +335,12 @@
     <if test="userFlag != null">
       AND user_flag = #{userFlag}
     </if>
+  </select>
+
+  <select id="getUserByAccount" parameterType="string" resultMap="BaseResultMap">
+    SELECT
+      <include refid="Base_Column_List"/>
+    FROM t_manage_user
+    WHERE account = #{account}
   </select>
 </mapper>

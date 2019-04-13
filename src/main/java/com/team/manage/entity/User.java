@@ -64,6 +64,7 @@ public class User implements Serializable {
     }
 
     public String getUserName() {
+        System.out.println("-----------getUserName()----------- ");
         return userName;
     }
 
@@ -72,6 +73,8 @@ public class User implements Serializable {
     }
 
     public String getAccount() {
+        System.out.println("----------getAccount()----------- ");
+
         return account;
     }
 

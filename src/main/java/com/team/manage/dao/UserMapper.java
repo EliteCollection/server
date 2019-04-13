@@ -29,4 +29,11 @@ public interface UserMapper {
      * @return
      */
     List<User> getUser(UserDTO userDTO);
+
+    /**
+     * 根据账号获取用户
+     * @param account
+     * @return
+     */
+    User getUserByAccount(String account);
 }

@@ -56,4 +56,15 @@ public class UserServiceImpl implements UserService {
     public int editUser(UserDTO userDTO) {
         return userMapper.updateByPrimaryKeySelective(userDTO);
     }
+
+    /**
+     * 根据账号获取用户
+     *
+     * @param account
+     * @return
+     */
+    @Override
+    public User getUserByAccount(String account) {
+        return userMapper.getUserByAccount(account);
+    }
 }
