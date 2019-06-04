@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="false">
+    <!--定义日志文件的存储地址-->
+    <property name="LOG_HOME" value="logs/paas-web" />
+
+    <!-- 彩色日志 -->
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+    <!-- 彩色日志格式 -->
+    <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+<!--
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) [%thread] %cyan(%logger{26}) - %msg%n</pattern>
+-->
+        </encoder>
+    </appender>
+    <!-- 按照每天生成日志文件 业务日志 -->
+    <appender name="business_log"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_HOME}/business.log.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>10</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{50} - %msg%n</pattern>
+        </encoder>
+
+    </appender>
+
+    <!-- 按照每天生成日志文件 业务日志 -->
+    <appender name="run_log"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_HOME}/run.log.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>10</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{50} - %msg%n</pattern>
+        </encoder>
+
+    </appender>
+
+    <!-- 按照每天生成日志文件 错误日志 -->
+    <appender name="error_log"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_HOME}/error.log.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>10</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+
+    </appender>
+
+    <logger name="cn.joinhealth.celina.common.spring.advice.CelinaControllerAdvice" level="error">
+        <appender-ref ref="error_log"/>
+    </logger>
+
+    <logger name="business" level="info">
+        <appender-ref ref="business_log"/>
+    </logger>
+    <logger name="cn.joinhealth.celina" level="info">
+        <appender-ref ref="run_log"/>
+    </logger>
+
+
+    <!--myibatis log configure-->
+    <logger name="dao" level="DEBUG"/>
+
+    <!-- 日志输出级别 -->
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
