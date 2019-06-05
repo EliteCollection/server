@@ -90,7 +90,12 @@ public class LoginController {
     @PostMapping("/editUser")
     public SimpleResult editUser(UserDTO userDTO){
         result = new SimpleResult();
-
+        if (StringUtil.isEmpty(userDTO.getId())){
+            result.setSuccess(false);
+            result.setMessage("用户主键未传,请检查参数");
+            return result;
+        }
+        userService.editUser(userDTO);
         return result;
     }
 

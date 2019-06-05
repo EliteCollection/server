@@ -68,14 +68,14 @@
 
     </appender>
 
-    <logger name="cn.joinhealth.celina.common.spring.advice.CelinaControllerAdvice" level="error">
+    <logger name="com.manage.filter.ControllerAdvice" level="error">
         <appender-ref ref="error_log"/>
     </logger>
 
     <logger name="business" level="info">
         <appender-ref ref="business_log"/>
     </logger>
-    <logger name="cn.joinhealth.celina" level="info">
+    <logger name="com.manage.system" level="info">
         <appender-ref ref="run_log"/>
     </logger>
 
