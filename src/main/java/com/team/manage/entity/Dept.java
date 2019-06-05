@@ -1,7 +1,10 @@
 package com.team.manage.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
+@Data
 public class Dept implements Serializable {
     private String id;
 
@@ -27,91 +30,4 @@ public class Dept implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getDeptCode() {
-        return deptCode;
-    }
-
-    public void setDeptCode(String deptCode) {
-        this.deptCode = deptCode;
-    }
-
-    public String getDeptName() {
-        return deptName;
-    }
-
-    public void setDeptName(String deptName) {
-        this.deptName = deptName;
-    }
-
-    public String getPinyinCode() {
-        return pinyinCode;
-    }
-
-    public void setPinyinCode(String pinyinCode) {
-        this.pinyinCode = pinyinCode;
-    }
-
-    public String getParentDeptCode() {
-        return parentDeptCode;
-    }
-
-    public void setParentDeptCode(String parentDeptCode) {
-        this.parentDeptCode = parentDeptCode;
-    }
-
-    public String getParentDeptName() {
-        return parentDeptName;
-    }
-
-    public void setParentDeptName(String parentDeptName) {
-        this.parentDeptName = parentDeptName;
-    }
-
-    public Integer getInvalidFlag() {
-        return invalidFlag;
-    }
-
-    public void setInvalidFlag(Integer invalidFlag) {
-        this.invalidFlag = invalidFlag;
-    }
-
-    public String getDeptMobileNo() {
-        return deptMobileNo;
-    }
-
-    public void setDeptMobileNo(String deptMobileNo) {
-        this.deptMobileNo = deptMobileNo;
-    }
-
-    public Integer getSortNo() {
-        return sortNo;
-    }
-
-    public void setSortNo(Integer sortNo) {
-        this.sortNo = sortNo;
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
-
-    public Integer getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Integer updateTime) {
-        this.updateTime = updateTime;
-    }
 }
