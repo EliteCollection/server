@@ -6,8 +6,10 @@ import com.team.manage.common.util.StringUtil;
 import com.team.manage.entity.User;
 import com.team.manage.entity.UserDTO;
 import com.team.manage.service.user.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +23,7 @@ import java.util.Map;
  * Create time 2019/1/26 下午6:41
  * Description 登录控制器
  */
+@Slf4j
 @RestController
 public class LoginController {
 
@@ -37,6 +40,7 @@ public class LoginController {
     @PostMapping("/login")
     public SimpleResult login(String account, String password){
         result = new SimpleResult(false);
+        log.info("接收到了登录请求");
         UserDTO userDTO = new UserDTO();
         userDTO.setAccount(account);
         userDTO.setPassword(StringUtil.getMd5(password));
@@ -90,4 +94,8 @@ public class LoginController {
         return result;
     }
 
+    @GetMapping("hello")
+    public String sayHello(){
+        return "hello boot";
+    }
 }
