@@ -95,6 +95,10 @@ public class LoginController {
             result.setMessage("用户主键未传,请检查参数");
             return result;
         }
+        //如果是修改密码,将密码再加密一下
+        if (userDTO.getPassword() != null){
+            userDTO.setPassword(StringUtil.getMd5(userDTO.getPassword()));
+        }
         userService.editUser(userDTO);
         return result;
     }
