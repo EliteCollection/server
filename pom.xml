@@ -24,7 +24,7 @@
         <pagehelper.version>4.0.1</pagehelper.version>
         <poi.version>3.12</poi.version>
         <poi-ooxml.version>3.12</poi-ooxml.version>
-        <quartz.version>2.1.3</quartz.version>
+        <quartz.version>2.3.2</quartz.version>
         <mysql.version>8.0.13</mysql.version>
 
     </properties>
